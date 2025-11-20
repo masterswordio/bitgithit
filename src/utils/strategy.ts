@@ -2,14 +2,6 @@ import { GameState } from '../contexts/GameContext';
 
 export type PlayerAction = 'HIT' | 'STAND' | 'DOUBLE' | 'SPLIT' | 'SURRENDER' | 'DEAL';
 
-export interface StrategyFeedback {
-  playerAction: PlayerAction;
-  optimalAction: PlayerAction;
-  isOptimal: boolean;
-  message: string;
-  recommendationReason: string;
-}
-
 interface StrategyRecommendation {
   action: PlayerAction;
   reason: string;
@@ -134,20 +126,15 @@ export const getStrategyRecommendation = (gameState: GameState): StrategyRecomme
   };
 };
 
-export const recordStrategyDecision = (
-  gameState: GameState,
-  playerAction: PlayerAction
-): StrategyFeedback | null => {
-  if (gameState.gamePhase !== 'playing') return null;
+export const recordStrategyDecision = (gameState: GameState, playerAction: PlayerAction) => {
+  if (gameState.gamePhase !== 'playing') return;
 
-  const recommendation = getStrategyRecommendation(gameState);
-  const optimalAction = recommendation.action;
+  const { action: optimalAction } = getStrategyRecommendation(gameState);
   const storedUser = JSON.parse(localStorage.getItem('ratio-user') || '{}');
   const stats = storedUser.stats || {};
 
   const strategyDecisions = (stats.strategyDecisions || 0) + 1;
-  const isOptimal = playerAction === optimalAction;
-  const strategyCorrect = (stats.strategyCorrect || 0) + (isOptimal ? 1 : 0);
+  const strategyCorrect = (stats.strategyCorrect || 0) + (playerAction === optimalAction ? 1 : 0);
   const strategyAccuracy = strategyDecisions > 0 ? strategyCorrect / strategyDecisions : 0;
 
   storedUser.stats = {
@@ -159,14 +146,4 @@ export const recordStrategyDecision = (
 
   localStorage.setItem('ratio-user', JSON.stringify(storedUser));
   window.dispatchEvent(new Event('storage'));
-
-  return {
-    playerAction,
-    optimalAction,
-    isOptimal,
-    message: isOptimal
-      ? `${playerAction} was the optimal play for this hand.`
-      : `${optimalAction} was the better play here.`,
-    recommendationReason: recommendation.reason,
-  };
 };
