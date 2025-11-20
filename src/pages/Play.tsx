@@ -53,12 +53,17 @@ export const Play: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 relative">
             <BlackjackGame onDecisionFeedback={setDecisionFeedback} />
+            <div className="hidden lg:block absolute top-4 right-4 w-full max-w-sm">
+              <ActionFeedback feedback={decisionFeedback} />
+            </div>
           </div>
 
-          <div className="space-y-4">
-            <ActionFeedback feedback={decisionFeedback} />
+          <div className="space-y-4 lg:space-y-6">
+            <div className="lg:hidden">
+              <ActionFeedback feedback={decisionFeedback} />
+            </div>
             {showCounting && <CardCountDisplay />}
             {showStrategy && <StrategyCheat />}
           </div>
