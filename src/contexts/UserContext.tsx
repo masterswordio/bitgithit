@@ -24,6 +24,8 @@ export interface UserStats {
   handsPlayed: number;
   winRate: number;
   strategyAccuracy: number;
+  strategyDecisions?: number;
+  strategyCorrect?: number;
   countingAccuracy: number;
   recentSessions: Session[];
 }
@@ -59,6 +61,8 @@ const defaultUser: User = {
     handsPlayed: 0,
     winRate: 0,
     strategyAccuracy: 0,
+    strategyDecisions: 0,
+    strategyCorrect: 0,
     countingAccuracy: 0,
     recentSessions: [],
   },
