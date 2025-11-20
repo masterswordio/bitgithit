@@ -57,7 +57,8 @@ export const Quiz: React.FC = () => {
     }
 
     setAnswered(answered + 1);
-    updateQuizStats(quizType, isCorrect);
+    const statsType = quizType === 'basic-strategy' ? 'basicStrategy' : 'cardCounting';
+    updateQuizStats(statsType as any, isCorrect);
   };
 
   const handleNext = () => {
