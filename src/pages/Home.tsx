@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spade, Brain, BookOpen, BarChart3, Play } from 'lucide-react';
+import { Spade } from 'lucide-react';
 import { Page } from '../App';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -57,41 +57,20 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className={`${themeClasses.cardBg} backdrop-blur-sm border ${themeClasses.border} rounded-xl p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group`}
-              onClick={() => onNavigate(feature.page)}
-            >
-              <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <feature.icon className="h-6 w-6 text-white" />
-              </div>
-              <h3 className={`text-xl font-bold ${themeClasses.text} mb-2`}>{feature.title}</h3>
-              <p className={`${themeClasses.textSecondary} text-sm`}>{feature.description}</p>
-            </div>
-          ))}
-        </div>
+        <h1 className={`text-6xl md:text-7xl font-bold ${themeClasses.text} mb-6`}>
+          Ratio
+        </h1>
 
-        {/* Quick Stats */}
-        <div className={`${themeClasses.cardBg} backdrop-blur-sm border ${themeClasses.border} rounded-xl p-6`}>
-          <h2 className={`text-xl font-bold ${themeClasses.text} mb-6 text-center`}>Training Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600 mb-1">Hi-Lo</div>
-              <p className={`${themeClasses.textSecondary} text-sm`}>Card Counting System</p>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-500 mb-1">Basic Strategy</div>
-              <p className={`${themeClasses.textSecondary} text-sm`}>Optimal Play Engine</p>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-500 mb-1">Analytics</div>
-              <p className={`${themeClasses.textSecondary} text-sm`}>Performance Tracking</p>
-            </div>
-          </div>
-        </div>
+        <p className={`text-xl md:text-2xl ${themeClasses.textSecondary} mb-12 leading-relaxed`}>
+          Master the art of blackjack strategy. Learn optimal play, master card counting, and become a calculated player with our comprehensive training platform.
+        </p>
+
+        <button
+          onClick={() => onNavigate('play')}
+          className={`${themeClasses.accent} text-white font-bold py-4 px-12 rounded-lg text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
+        >
+          Start Playing
+        </button>
       </div>
     </div>
   );
