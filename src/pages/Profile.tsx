@@ -27,6 +27,13 @@ export const Profile: React.FC = () => {
     });
   }, [user]);
 
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      preferences: { ...user.preferences }
+    }));
+  }, [user.preferences]);
+
   const handleSave = async () => {
     setIsSaving(true);
     setSaveSuccess(false);

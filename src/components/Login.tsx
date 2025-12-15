@@ -20,21 +20,6 @@ export const Login: React.FC = () => {
       return;
     }
 
-    if (username.length < 3) {
-      setError('Username must be at least 3 characters');
-      return;
-    }
-
-    if (username.length > 20) {
-      setError('Username must be less than 20 characters');
-      return;
-    }
-
-    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-      setError('Username can only contain letters, numbers, and underscores');
-      return;
-    }
-
     setIsLoading(true);
     const success = await login(username);
     setIsLoading(false);
